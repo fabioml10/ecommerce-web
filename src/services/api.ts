@@ -23,7 +23,7 @@ function setHeaders(res: AxiosResponse<any>) {
     };
 
     api.defaults.headers = apiData;
-    Cookie.set('@api-data', apiData);
+    Cookie.set('@api-data', JSON.stringify(apiData));
   }
 }
 
@@ -57,7 +57,7 @@ api.interceptors.response.use(res => {
       err.response.status === 401 ||
       err.response.status === 403
     )) {
-    Router.push('/Auth/Login');
+    Router.push('/auth/login');
   }
 
   throw err;

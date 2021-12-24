@@ -19,7 +19,7 @@ const withAuthAdmin = (Component) => {
         apiData['aceess-token'] === ''
     ) {
       router.push({
-        pathname: '/Auth/Login',
+        pathname: '/auth/login',
         query: {
           callback: router.pathname
         }
