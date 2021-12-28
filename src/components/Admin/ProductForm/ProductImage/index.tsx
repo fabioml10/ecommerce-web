@@ -10,7 +10,7 @@ interface ProductImageProps {
 }
 
 const ProductImage: React.FC<ProductImageProps> = ({ setImage, productImage }) => {
-  const [imageToShow, setImageToShow] = useState('/product-image.png')
+  const [imageToShow, setImageToShow] = useState('product-image.png')
   const imageInputRef = useRef(null)
 
   useEffect (() => {
