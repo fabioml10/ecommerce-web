@@ -26,14 +26,12 @@ const ProductForm: React.FC<ProductFormProps> = ({ handleSubmit, action = 'Adici
   const [price, setPrice] = useState(0);
   const [status, setStatus] = useState('available');
   const [image, setImage] = useState<File>();
-
   const [mode, setMode] = useState('pve');
   const [releaseDate, setReleaseDate] = useState('');
   const [developer, setDeveloper] = useState('');
-
   const [systemRequirement, setSystemRequirement] = useState(1);
-
   const [productImage, setProductImage] = useState('');
+  const [featured, setFeatured] = useState('false');
 
   const product: Product = useSelector(state => state.product);
 
@@ -45,6 +43,9 @@ const ProductForm: React.FC<ProductFormProps> = ({ handleSubmit, action = 'Adici
 
   const router = useRouter();
   const dispatch = useDispatch();
+
+  setStatus(product.status);
+  setFeatured(product.featured);
 
   // checando se o produto existe e se é a edição do mesmo para que sejam setados os valores que estão salvos no estado do redux no form.
   useEffect (() => {
@@ -92,15 +93,13 @@ const ProductForm: React.FC<ProductFormProps> = ({ handleSubmit, action = 'Adici
     formData.append('product[developer]', developer);
     formData.append('product[release_date]', releaseDate);
     formData.append('product[system_requirement_id]', systemRequirement.toString())
-
     formData.append('product[price]', price.toString());
     formData.append('product[status]', status);
 
     formData.append('product[productable]', 'game');
+    formData.append('product[featured]', featured);
 
-    if (image) {
-      formData.append('product[image]', image);
-    }
+    if (image) formData.append('product[image]', image);
 
     handleSubmit(formData);
   }
@@ -289,7 +288,22 @@ const ProductForm: React.FC<ProductFormProps> = ({ handleSubmit, action = 'Adici
             </Row>
 
             <Row>              
-              <Form.Group as={Col} md={6} sm={12} className="p-2">
+              <Form.Group as={Col} md={4} sm={12} className="p-2">
+                  <Form.Label>Em destaque:</Form.Label>
+                  <Form.Control 
+                      as="select"
+                      className={styles.secundary_input}
+                      value={featured}
+                      onChange={
+                          (evt: React.ChangeEvent<HTMLSelectElement>) =>
+                          setFeatured(evt.target.value)
+                      }
+                      >
+                      <option value="false">Não</option>
+                      <option value="true">Sim</option>
+                  </Form.Control>
+              </Form.Group>  
+              <Form.Group as={Col} md={4} sm={12} className="p-2">
                 <Form.Label>Preço</Form.Label>
                 <Form.Control
                   type="text"
@@ -304,7 +318,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ handleSubmit, action = 'Adici
                 />
               </Form.Group>
 
-              <Form.Group as={Col} md={6} sm={12} className="p-2">
+              <Form.Group as={Col} md={4} sm={12} className="p-2">
                 <Form.Label>Status</Form.Label>
                 <Form.Control
                   as="select"

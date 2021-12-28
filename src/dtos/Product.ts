@@ -14,4 +14,5 @@ export default interface Product {
   release_date: string
   categories: Category[]
   system_requirement: SystemRequirement
+  featured: string
 }
