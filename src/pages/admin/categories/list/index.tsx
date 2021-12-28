@@ -63,7 +63,7 @@ const List: React.FC = () => {
 
   const handleEdit = (category: Category): void => {
     dispatch(setCategoryToEdit(category))
-    router.push('/Admin/Categories/Edit')
+    router.push('/admin/categories/edit')
   }
 
   if (error) {
@@ -77,7 +77,7 @@ const List: React.FC = () => {
         title="Categorias" 
         path="Dashboard > Categorias" 
         icon={faGhost} 
-        newPath="/Admin/Categories/New"/>
+        newPath="/admin/categories/new"/>
       <AdminDeleteModal handleClose={handleClose} show={show} target="categoria" />
       {
         data && data.categories && data.categories.length > 0 ? (
