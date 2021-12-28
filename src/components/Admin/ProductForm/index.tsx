@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Form, Col, Row } from 'react-bootstrap';
 import { faTimes, faGamepad } from '@fortawesome/free-solid-svg-icons';
-import styles from '../../../styles/AdminPanel.module.css';
 import StyledButton from '../../shared/StyledButton';
 import ProductImage from './ProductImage';
 import { useRouter } from 'next/router';
@@ -12,6 +11,7 @@ import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux';
 import Product from '../../../dtos/Product';
 import { clearProductToEdit } from '../../../store/modules/admin/product/reducer';
+import styles from './styles.module.css'
 
 interface ProductFormProps {
   handleSubmit: (product: FormData) => Promise<void>;

@@ -2,7 +2,7 @@ import { InputGroup, FormControl, Row, Col } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faShoppingCart, faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import Logo from '../../Logo'
-import styles from '../../../../styles/Header.module.css'
+import styles from './styles.module.css'
 
 const StorefrontHeader: React.FC = () => {
   return (

@@ -3,7 +3,7 @@ import { Row, Col } from 'react-bootstrap'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import TitleAndPath from './TitleAndPath'
 import SearchAndIcon from './SearchAndIcon'
-import styles from '../../../styles/AdminTitle.module.css'
+import styles from './styles.module.css'
 
 interface TitleAdminPanelProps {
   title: string

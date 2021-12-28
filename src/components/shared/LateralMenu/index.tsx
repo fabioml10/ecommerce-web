@@ -2,7 +2,7 @@ import Logo from '../Logo'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSignal, faUser, faGamepad, faCheckSquare, faLaptop, faTicketAlt, faDollarSign, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
-import styles from '../../../styles/MenuLateral.module.css'
+import styles from './styles.module.css'
 
 const LateralMenu: React.FC = () => {
   return(

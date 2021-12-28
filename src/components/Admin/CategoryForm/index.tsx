@@ -4,9 +4,9 @@ import { faGhost, faTimes } from '@fortawesome/free-solid-svg-icons'
 import StyledButton from '../../../components/shared/StyledButton'
 import { useRouter } from 'next/router'
 import { useSelector, useDispatch } from 'react-redux'
-import styles from '../../../styles/AdminPanel.module.css'
 import Category from '../../../dtos/Category'
 import { clearCategoryToEdit } from '../../../store/modules/admin/category/reducer'
+import styles from './styles.module.css'
 
 interface CategoryFormProps {
   handleSubmit: (category: Category) => Promise<void>

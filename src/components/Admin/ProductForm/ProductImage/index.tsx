@@ -2,7 +2,7 @@ import { useRef, useState, useEffect, Dispatch, SetStateAction } from 'react'
 import { Col } from 'react-bootstrap'
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import StyledButton from '../../../shared/StyledButton'
-import styles from '../../../../styles/ProductForm.module.css'
+import styles from './styles.module.css'
 
 interface ProductImageProps {
   setImage: Dispatch<SetStateAction<File>>

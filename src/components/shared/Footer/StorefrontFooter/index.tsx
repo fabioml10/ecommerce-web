@@ -3,7 +3,7 @@ import { Col, Row } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faFacebookF, faInstagram, faYoutube, faTwitter, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import Logo from '../../Logo'
-import styles from '../../../../styles/Footer.module.css'
+import styles from './styles.module.css'
 
 const StorefrontFooter: React.FC = () => {
   return (
