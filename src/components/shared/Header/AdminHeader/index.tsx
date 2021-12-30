@@ -37,10 +37,12 @@ const AdminHeader: React.FC = () => {
         </Link>
       </Col>
       <Col lg={6} xs={3} className={styles.profile}>
-        <div className="float-right">
-          <span className={styles.name}>{name}</span>
-          <FontAwesomeIcon icon={faUserCircle} color="var(--color-gray-light)" />
-        </div>
+        <Link href="/profile">
+          <a className={styles.profile}>
+            <span className={styles.name}>{name}</span>
+            <FontAwesomeIcon icon={faUserCircle} color="var(--color-gray-light)" />
+          </a>
+        </Link>
       </Col>
     </Row>
   )

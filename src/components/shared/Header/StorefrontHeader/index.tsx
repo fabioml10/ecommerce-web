@@ -4,8 +4,7 @@ import { InputGroup, FormControl, Row, Col } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faShoppingCart, faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import Logo from '../../Logo'
-import Link from 'next/link'
-import ProductSearchService from '../../../../util/ProductSearchService'
+import LoggedService from '../../../../util/LoggedService'
 import styles from './styles.module.css'
 
 const StorefrontHeader: React.FC = () => {
@@ -14,8 +13,14 @@ const StorefrontHeader: React.FC = () => {
 
   const handleSearch = (): void => {
     router.push(`
-        /Search?search=${search}&lentgh=12&page=1&order=price&direction=asc
+      /search?search=${search}&length=12&page=1&order=price&direction=asc
     `)
+  }
+
+  const handleUserRedirect = (): void => {
+    router.push(
+      LoggedService.execute() ? '/profile' : 'auth/admin'
+    );
   }
 
   return (
@@ -60,11 +65,11 @@ const StorefrontHeader: React.FC = () => {
                 <FontAwesomeIcon icon={faShoppingCart} color="var(--color-gray-light)" />
               </Col>
               <Col md={4} xs={4}>
-              <Link href="/auth/login">
-                <a>
-                  <FontAwesomeIcon icon={faUserCircle} color="var(--color-gray-light)" />
-                </a>
-              </Link>
+                <FontAwesomeIcon 
+                  icon={faUserCircle} 
+                  color="var(--color-gray-light)" 
+                  onClick={handleUserRedirect}
+                />
               </Col>
             </Row>
           </Col>
