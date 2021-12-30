@@ -9,12 +9,34 @@ import ProductShowService from '../../services/productShow'
 import { toast } from 'react-toastify'
 import { format, parseJSON } from 'date-fns'
 import ProductShowData from '../../dtos/ProductShowData'
+import WishlistService from '../../services/wishlist'
+import LoggedService from '../../util/LoggedService'
 import styles from './styles.module.css'
 
 const Product: React.FC<ProductShowData> = ({ product }) => {
   const router = useRouter()
   const { data, error } = useSwr(`/storefront/v1/products/${router?.query?.id}`, ProductShowService.show, { fallbackData: product})
   if (error) toast.error('Erro ao obter o produto')
+
+  const handleWishitem = async (): Promise<void> => {
+    if (LoggedService.execute()) {
+      try {
+        await WishlistService.add(data?.id);
+        toast.info('Adicionado a sua lista de desejos!')
+      } catch (error) {
+        toast.error('Erro ao adicionar a sua lista de desejos!')
+        console.log(error)
+      }
+      return
+    }
+
+    router.push({
+      pathname: '/auth/login',
+      query: {
+        callback: router.pathname.replace('[id]', data?.id.toString())
+      }
+    });
+  }
 
   return (
     <MainComponent>
@@ -98,7 +120,13 @@ const Product: React.FC<ProductShowData> = ({ product }) => {
             <hr className={styles.line} />
             <Row className="mt-4 text-center">
               <Col>
-                <StyledButton icon={faHeart} action={"Favoritar"} type_button="red" className={styles.gray_button} />
+                <StyledButton
+                  icon={faHeart}
+                  action={"Favoritar"}
+                  type_button="red"
+                  className={styles.gray_button}
+                  onClick={handleWishitem}
+                />
               </Col>
 
               <Col>
