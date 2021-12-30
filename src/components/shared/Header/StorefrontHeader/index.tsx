@@ -6,11 +6,13 @@ import { faSearch, faShoppingCart, faUserCircle } from '@fortawesome/free-solid-
 import Logo from '../../Logo'
 import LoggedService from '../../../../util/LoggedService'
 import Badge from '../../Badge'
+import CartModal from '../../../Storefront/CartModal'
 import styles from './styles.module.css'
 
 const StorefrontHeader: React.FC = () => {
-  const [search, setSearch] = useState('')
   const router = useRouter()
+  const [search, setSearch] = useState('')
+  const [showCartModal, setShowCartModal] = useState(false);
 
   const handleSearch = (): void => {
     router.push(`
@@ -63,8 +65,12 @@ const StorefrontHeader: React.FC = () => {
                 />
               </Col>
               <Col md={4} xs={4}>
-                <FontAwesomeIcon icon={faShoppingCart} color="var(--color-gray-light)" />
+                <FontAwesomeIcon 
+                  icon={faShoppingCart} color="var(--color-gray-light)" 
+                  onClick={() => setShowCartModal(!showCartModal)}
+                />
                 <Badge />
+                {showCartModal && <CartModal searchPage={router.pathname === '/search'}/>}
               </Col>
               <Col md={4} xs={4}>
                 <FontAwesomeIcon 
