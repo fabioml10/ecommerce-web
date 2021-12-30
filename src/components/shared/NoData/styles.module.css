@@ -1,7 +1,7 @@
-.admin_panel {
-  background-color: var(--color-secondary);
-  padding: 30px;
-  border-radius: 10px;
-  margin-top: 20px;
-  margin-bottom: 40px;
+.title_and_path {
+  text-align: left;
+}
+
+.title_and_path h4, .title_and_path span {
+  display: inline;
 }

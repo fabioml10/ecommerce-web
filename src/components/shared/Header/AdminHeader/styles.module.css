@@ -17,7 +17,11 @@
   transition: color 0.2s;
 }
 
-.menu  {
+.active {
+  color: var(--color-active);
+}
+
+.menu {
   display: flex;
   align-items: center;
   justify-content: left;
@@ -27,12 +31,20 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  margin-left: auto;
+  margin-right: 0;
 }
 
-.name {
-  color: var(--color-gray-light);
-  font-size: 0.9rem;
-  margin-right: 10px;
+.profile span {
+  transition: color 0.2s;
+}
+
+.profile span:hover {
+  color: var(--color-hover);
+}
+
+.profile span:active {
+  color: var(--color-active);
 }
 
 @media screen and (max-width: 990px) {
@@ -40,11 +52,15 @@
     margin: 20px 1px;
   }
 
-  .menu  {
+  .menu {
     justify-content: space-around;
   }
 
   .profile {
+    margin: 0;
+  }
+
+  .profile span {
     display: none;
   }
 }
