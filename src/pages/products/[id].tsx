@@ -13,7 +13,7 @@ import styles from './styles.module.css'
 
 const Product: React.FC<ProductShowData> = ({ product }) => {
   const router = useRouter()
-  const { data, error } = useSwr(`/storefront/v1/products/${router?.query?.id}`, ProductShowService.show, { fallback: product})
+  const { data, error } = useSwr(`/storefront/v1/products/${router?.query?.id}`, ProductShowService.show, { fallbackData: product})
   if (error) toast.error('Erro ao obter o produto')
 
   return (

@@ -17,7 +17,7 @@ const Storefront: React.FC<StoreFrontProps> = ({ products }) => {
 
   const { data, error } = useSwr(
     '/storefront/v1/home', 
-    HomeService.index, { fallback: products }
+    HomeService.index, { fallbackData: products }
   )
 
   const { featured, last_releases, cheapest } = data
