@@ -1,5 +1,6 @@
 import { Button } from 'react-bootstrap'
 import ProductHome from '../../../dtos/ProductHome'
+import { useRouter } from 'next/router'
 import styles from './styles.module.css'
 
 interface ProductInfoProps {
@@ -8,6 +9,8 @@ interface ProductInfoProps {
 }
 
 const ProductInfo: React.FC<ProductInfoProps> = ({ type = 'normal', product }) => {
+  const router = useRouter()
+
   return (
     <div className={styles.product}>
       <div>
@@ -33,6 +36,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ type = 'normal', product }) =
             className={
               `${(type === 'highlighted' ? 'btn btn-info' : styles.normal_button)}`
             }
+            onClick={() => router.push(`/products/${product.id}`)}
           >
             {`R$ ${product.price}`}
           </Button> 

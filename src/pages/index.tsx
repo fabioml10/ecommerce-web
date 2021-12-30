@@ -20,7 +20,11 @@ const Storefront: React.FC = () => {
       {
         featured?.slice(0, 3)?.map(
           product => (
-            <Carousel.Item key={product.id}>
+            <Carousel.Item 
+              key={product.id}
+              onClick={() => router.push(`/products/${product.id}`)}
+              className={styles.carousel_item}
+            >
               <img
                 className={`d-block w-100 ${styles.carousel_image}`}
                 src={product.image_url}
