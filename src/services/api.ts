@@ -19,7 +19,7 @@ function setHeaders(res: AxiosResponse<any>) {
       client: res.headers.client,
       expiry: res.headers.expiry,
       'token-type': res.headers['token-type'],
-      uid: res.headers.uid
+      uid: res.headers.uid,
     };
 
     api.defaults.headers = apiData;
@@ -64,9 +64,11 @@ api.interceptors.response.use(res => {
 });
 
 api.interceptors.request.use(req => {
+  req.headers = { ContentType: 'application/json' }
+
   if(req.url.includes('admin')) {
-    const apiData: ApiData = JSON.parse(Cookie.get('@api-data'));
-    req.headers = apiData;
+    const apiData: ApiData = JSON.parse(Cookie.get('@api-data'))
+    req.headers = {...apiData, ...req.headers}
   }
 
   return req;
