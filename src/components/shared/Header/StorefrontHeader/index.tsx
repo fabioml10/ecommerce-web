@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faShoppingCart, faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import Logo from '../../Logo'
 import LoggedService from '../../../../util/LoggedService'
+import Badge from '../../Badge'
 import styles from './styles.module.css'
 
 const StorefrontHeader: React.FC = () => {
@@ -63,6 +64,7 @@ const StorefrontHeader: React.FC = () => {
               </Col>
               <Col md={4} xs={4}>
                 <FontAwesomeIcon icon={faShoppingCart} color="var(--color-gray-light)" />
+                <Badge />
               </Col>
               <Col md={4} xs={4}>
                 <FontAwesomeIcon 
