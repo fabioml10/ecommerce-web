@@ -7,12 +7,16 @@ import Logo from '../../Logo'
 import LoggedService from '../../../../util/LoggedService'
 import Badge from '../../Badge'
 import CartModal from '../../../Storefront/CartModal'
+import { useSelector } from 'react-redux';
+import ProductShow from '../../../../dtos/ProductShow';
 import styles from './styles.module.css'
 
 const StorefrontHeader: React.FC = () => {
   const router = useRouter()
+
   const [search, setSearch] = useState('')
-  const [showCartModal, setShowCartModal] = useState(false);
+  const [showCartModal, setShowCartModal] = useState(false)
+  const cartProducts: ProductShow[] = useSelector(state => state.cartProducts)
 
   const handleSearch = (): void => {
     router.push(`
@@ -69,8 +73,14 @@ const StorefrontHeader: React.FC = () => {
                   icon={faShoppingCart} color="var(--color-gray-light)" 
                   onClick={() => setShowCartModal(!showCartModal)}
                 />
-                <Badge />
-                {showCartModal && <CartModal searchPage={router.pathname === '/search'}/>}
+                {
+                  cartProducts?.length > 0 &&
+                  <Badge>{cartProducts.length}</Badge>
+                }
+                {
+                  cartProducts?.length > 0 && showCartModal &&
+                    <CartModal searchPage={router.pathname === '/Search'}/>
+                }
               </Col>
               <Col md={4} xs={4}>
                 <FontAwesomeIcon 

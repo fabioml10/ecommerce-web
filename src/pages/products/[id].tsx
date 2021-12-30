@@ -11,10 +11,14 @@ import { format, parseJSON } from 'date-fns'
 import ProductShowData from '../../dtos/ProductShowData'
 import WishlistService from '../../services/wishlist'
 import LoggedService from '../../util/LoggedService'
+import { useDispatch } from 'react-redux';
+import { addCartProduct } from '../../store/modules/storefront/cartProducts/reducer';
 import styles from './styles.module.css'
 
 const Product: React.FC<ProductShowData> = ({ product }) => {
   const router = useRouter()
+  const dispatch = useDispatch();
+
   const { data, error } = useSwr(`/storefront/v1/products/${router?.query?.id}`, ProductShowService.show, { fallbackData: product})
   if (error) toast.error('Erro ao obter o produto')
 
@@ -130,7 +134,12 @@ const Product: React.FC<ProductShowData> = ({ product }) => {
               </Col>
 
               <Col>
-                <StyledButton icon={faCartPlus} action={"Comprar"} type_button="blue" />
+                <StyledButton
+                  icon={faCartPlus} 
+                  action={"Comprar"} 
+                  type_button="blue" 
+                  onClick={() => dispatch(addCartProduct(data))}
+                />
               </Col>
             </Row>
           </BlueBackground>
