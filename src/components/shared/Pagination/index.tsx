@@ -1,48 +1,64 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, HtmlHTMLAttributes } from 'react'
 import { useRouter } from 'next/router'
 import StyledButton from '../StyledButton'
-import Meta from '../../../dtos/Meta'
 import PaginationService from '../../../util/PaginationService'
 
-const Pagination: React.FunctionComponent<Meta> = ({ page, length, total, total_pages }) => {
-  const [pagination, setPagination] = useState(['1']);
-  const router = useRouter();
+type PaginationProps = HtmlHTMLAttributes<HTMLDivElement> & {
+  page: number;
+  total_pages: number;
+}
 
-  //sempre que o total_pages mudar, o array de listagem também deverá mudar
+const Pagination: React.FunctionComponent<PaginationProps> = ({ page, total_pages, ...rest }) => {
+  const [pagination, setPagination] = useState(['1'])
+  const router = useRouter()
+
   useEffect(() => {
     setPagination(PaginationService.execute(total_pages, page));
   }, [total_pages])
 
-  // método utilizado para tratar a seleção das páginas
   const handlePageClick = (page: string): void => {
-    router.push(`${router.pathname}?page=${page}`)
+    router.push({
+      pathname: router.pathname,
+      query: {
+        ...router.query,
+        page: page
+      },
+    })
   }
 
-  // método para tratar a seleção da página posterior a atual
   const handleNextPageClick = (): void => {
     if (page < total_pages) {
-      router.push(`${router.pathname}?page=${page + 1}`)
+      router.push({
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          page: page + 1
+        },
+      })
     }
   }
 
-  // método para tratar a seleção da página anterior a atual
   const handlePreviusPageClick = (): void => {
     if (page > 1) {
-      router.push(`${router.pathname}?page=${page - 1}`)
+      router.push({
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          page: page - 1
+        },
+      })
     }
   }
 
   return (
-    <div className="pagination justify-content-end">
+    <div className="pagination justify-content-end" {...rest}>
       <div className="pagination">
         <StyledButton 
           action="<" 
           type_button="blue"
           onClick={handlePreviusPageClick}
         />
-
         {
-          // quando o item do array da páginação for '...' será apenas renderizado o texto '...', caso contrário será renderizado um botão com os números das páginas
           pagination.map((item, index) => (
             item === '...' ? '...' : (
                 <StyledButton 
@@ -55,7 +71,6 @@ const Pagination: React.FunctionComponent<Meta> = ({ page, length, total, total_
               )
             ))
         }
-
         <StyledButton 
           action=">" 
           type_button="blue" 

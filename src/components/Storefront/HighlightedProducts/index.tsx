@@ -5,12 +5,13 @@ import ProductHome from '../../../dtos/ProductHome'
 import styles from './styles.module.css'
 
 interface HighlightedProductsProps {
-  title: string
-  type?: string
-  products: ProductHome[]
+  title: string;
+  type?: string;
+  products: ProductHome[];
+  handleSeeMore(event: React.MouseEvent<HTMLElement>): void;
 }
 
-const HighlightedProducts: React.FC<HighlightedProductsProps> = ({ title, type, products }) => {
+const HighlightedProducts: React.FC<HighlightedProductsProps> = ({ title, type, products, handleSeeMore }) => {
   return (
     <div className={styles.products}>
       <Row className={styles.products_header}>
@@ -18,7 +19,8 @@ const HighlightedProducts: React.FC<HighlightedProductsProps> = ({ title, type, 
         <hr className={styles.line} />
         <Link href="#">
           <a>
-          <Button 
+          <Button
+            onClick={handleSeeMore}
             className={
               `${type === 'highlighted' ? styles.highlighted_button : styles.normal_button}`
             }

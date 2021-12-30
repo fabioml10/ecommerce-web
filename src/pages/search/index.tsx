@@ -10,6 +10,7 @@ import SearchService from '../../services/search'
 import ProductSearchService from '../../util/ProductSearchService'
 import CategoriesService from '../../services/categories'
 import { toast } from 'react-toastify'
+import Pagination from '../../components/shared/Pagination'
 import styles from './styles.module.css'
 
 const defaultUrl = '/storefront/v1/products'
@@ -25,7 +26,7 @@ const Search: React.FC = () => {
     direction 
   } = router.query
 
-  const [search, setSearch] = useState(searchRouter?.toString())
+  const [search, setSearch] = useState(searchRouter?.toString() || '')
   const [order, setOrder] = useState(() => {
     if (!!orderRouter) {
       return `${orderRouter.toString()}-${router.query.direction.toString()}`
@@ -76,8 +77,8 @@ const Search: React.FC = () => {
 
     const handleSearch = (): void => {
       router.push(`
-        /search${ProductSearchService.execute({ search })}
-      `)
+        /Search?search=${search}&lentgh=12&page=1&order=price&direction=asc
+      `);
     }
   
     if (error) {
@@ -87,7 +88,6 @@ const Search: React.FC = () => {
     if (categoriesError) {
       toast.error('Error ao obter as categorias.')
     }
-
 
   return(
     <MainComponent>
@@ -220,6 +220,14 @@ const Search: React.FC = () => {
           }
         </Row>
       </div>
+
+      {
+        data?.meta?.total > 0 &&
+        <Pagination 
+          className={styles.pagination} 
+          {...data?.meta} 
+        />
+      }
     </MainComponent>
   )
 }

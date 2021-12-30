@@ -77,3 +77,11 @@
     text-align: center;
   }
 }
+
+.pagination {
+  margin-bottom: 20px;
+}
+
+.pagination div {
+  justify-content: center;
+}

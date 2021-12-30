@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import MainComponent from '../components/shared/MainComponent'
 import { Carousel } from 'react-bootstrap'
 import HighlightedProducts from '../components/Storefront/HighlightedProducts'
@@ -7,6 +8,7 @@ import { toast } from 'react-toastify'
 import styles from './styles.module.css'
 
 const Storefront: React.FC = () => {
+  const router = useRouter()
   const { data, error } = useSwr('/storefront/v1/home', HomeService.index)
   const { featured, last_releases, cheapest } = {...data }
 
@@ -33,16 +35,39 @@ const Storefront: React.FC = () => {
         title="Ofertas da Semana" 
         type="highlighted" 
         products={cheapest}
+        handleSeeMore={
+          () => router.push({
+            pathname: '/search',
+            query: {
+              order: 'price',
+              direction: 'asc'
+            }
+          })
+        }
       />
 
       <HighlightedProducts 
         title="Lançamentos" 
         products={last_releases}
+        handleSeeMore={
+          () => router.push({
+            pathname: '/search',
+            query: {
+              order: 'release_date',
+              direction: 'desc'
+            }
+          })
+        }
       />
 
       <HighlightedProducts 
         title="Mais Populares" 
         products={featured}
+        handleSeeMore={
+          () => router.push({
+            pathname: '/search',
+          })
+        }
       />
     </MainComponent>
   )
