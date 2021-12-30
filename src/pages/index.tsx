@@ -6,7 +6,7 @@ const Home: React.FC = () => {
 
   return (
     <MainComponent>
-      <button onClick={() => router.push('/auth/login')}>Login</button>
+      <h1>Home</h1>
     </MainComponent>
   )
 }

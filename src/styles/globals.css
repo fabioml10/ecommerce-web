@@ -11,6 +11,10 @@
     --color-active: #71eFFF;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 html,
 body {
     padding: 0;
@@ -41,8 +45,9 @@ a:hover svg {
     color: var(--color-hover);
 }
 
-* {
-    box-sizing: border-box;
+a:active, 
+a:active svg {
+    color: var(--color-active);
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
