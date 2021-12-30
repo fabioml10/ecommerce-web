@@ -8,12 +8,12 @@ import { useRouter } from 'next/router'
 import ProductShowService from '../../services/productShow'
 import { toast } from 'react-toastify'
 import { format, parseJSON } from 'date-fns'
+import ProductShowData from '../../dtos/ProductShowData'
 import styles from './styles.module.css'
 
-const Product: React.FC = () => {
+const Product: React.FC<ProductShowData> = ({ product }) => {
   const router = useRouter()
-  const { data, error } = useSwr(`/storefront/v1/products/${router?.query?.id}`, ProductShowService.show)
-
+  const { data, error } = useSwr(`/storefront/v1/products/${router?.query?.id}`, ProductShowService.show, { fallback: product})
   if (error) toast.error('Erro ao obter o produto')
 
   return (
@@ -139,6 +139,11 @@ const Product: React.FC = () => {
       </Row>
     </MainComponent>
   )
+}
+
+export async function getServerSideProps({ params }) {
+  const product = await ProductShowService.show(`/storefront/v1/products/${params.id}`)
+  return { props: { product } }
 }
 
 export default Product

@@ -5,12 +5,22 @@ import HighlightedProducts from '../components/Storefront/HighlightedProducts'
 import useSwr from 'swr'
 import HomeService from '../services/home'
 import { toast } from 'react-toastify'
+import HomeIndexData from '../dtos/HomeIndexData'
 import styles from './styles.module.css'
 
-const Storefront: React.FC = () => {
+interface StoreFrontProps {
+  products: HomeIndexData
+}
+
+const Storefront: React.FC<StoreFrontProps> = ({ products }) => {
   const router = useRouter()
-  const { data, error } = useSwr('/storefront/v1/home', HomeService.index)
-  const { featured, last_releases, cheapest } = {...data }
+
+  const { data, error } = useSwr(
+    '/storefront/v1/home', 
+    HomeService.index, { fallback: products }
+  )
+
+  const { featured, last_releases, cheapest } = data
 
   if (error) toast.error('Erro ao obter dados da home!')
 
@@ -75,6 +85,11 @@ const Storefront: React.FC = () => {
       />
     </MainComponent>
   )
+}
+
+export async function getStaticProps() {
+  const products = await HomeService.index('/storefront/v1/home')
+  return { props: { products } }
 }
 
 export default Storefront
