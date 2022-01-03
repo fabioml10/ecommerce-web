@@ -9,6 +9,7 @@ import useSwr from 'swr'
 import { toast } from "react-toastify"
 import { useRouter } from 'next/router'
 import UrlService from "../../../../util/UrlService"
+import withAuthAdmin from "../../../../components/withAuthAdmin"
 
 const defaultUrl = '/admin/v1/orders'
 
@@ -24,25 +25,20 @@ const Orders: React.FC = () => {
     )
   }, [router?.query?.page])
 
-  if (error) {
-    toast.error('Erro ao obter os dados dos pedidos!')
-    console.log(error)
-  }
+  if (error) toast.error('Erro ao obter os dados dos pedidos!')
 
   return (
     <AdminComponent>
       <TitleAdminPanel title="Vendas" path="Dashboard > Vendas" newPath="#"/>
-
       <div className={styles.admin_panel}>
         <OrdersList 
           orders={data?.orders}
           admin={true}
         />
-
         <Pagination {...data?.meta}/>
       </div>
     </AdminComponent>
   )
 }
 
-export default Orders
+export default withAuthAdmin(Orders)
