@@ -35,7 +35,7 @@ const OrdersList: React.FC<OrdersListProps> = ({orders, admin=false}) => {
                 className={styles.table_line}
               >
                 <td>
-                  <Link href={`${(admin ? '/Admin' : '')}/Orders/${order.id}`}>
+                  <Link href={`${(admin ? '/admin' : '')}/orders/${order.id}`}>
                     <a>
                       {`#${order?.id}`} 
                     </a>

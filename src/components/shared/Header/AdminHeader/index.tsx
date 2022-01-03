@@ -20,8 +20,8 @@ const AdminHeader: React.FC = () => {
         <Link href="/admin/products/list"><a><FontAwesomeIcon icon={faGamepad} color="var(--color-gray-light)" className={`ml-3 ${router.pathname === '/admin/products/list' ? styles.active : ''}`} /></a></Link>
         <Link href="/admin/categories/list"><a><FontAwesomeIcon icon={faCheckSquare} color="var(--color-gray-light)" className={`ml-3 ${router.pathname === '/admin/categories/list' ? styles.active : ''}`} /></a></Link>
         <Link href="/admin/system_requirements/list"><a><FontAwesomeIcon icon={faLaptop} color="var(--color-gray-light)" className="ml-3" /></a></Link>
-        <Link href="/admin/coupons/list"><a><FontAwesomeIcon icon={faTicketAlt} color="var(--color-gray-light)" className={`ml-3 ${router.pathname === '/Admin/system_requirements/list' ? styles.active : ''}`} /></a></Link>
-        <Link href="/Admin/Orders/List">
+        <Link href="/admin/coupons/list"><a><FontAwesomeIcon icon={faTicketAlt} color="var(--color-gray-light)" className={`ml-3 ${router.pathname === '/admin/system_requirements/list' ? styles.active : ''}`} /></a></Link>
+        <Link href="/admin/orders/list">
           <a>
             <FontAwesomeIcon 
               icon={faDollarSign} 

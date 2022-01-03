@@ -30,16 +30,16 @@ const SearchAndIcon: React.FC<SearchAndIcon> = ({ icon, newPath }) => {
 
   useEffect(() => {
     switch(router.pathname) {
-      case '/Admin/Products/List':
+      case '/admin/products/list':
         setPlaceholder('Pesquisar produto')
         break
-      case '/Admin/Categories/List':
+      case '/admin/categories/list':
         setPlaceholder('Pesquisar categoria')
         break
-      case '/Admin/SystemRequirements/List':
+      case '/admin/system_requirements/list':
         setPlaceholder('Pesquisar requisitos de sistema')
         break
-      case '/Admin/Coupons/List':
+      case '/admin/coupons/list':
         setPlaceholder('Pesquisar cupom')
         break
       default:

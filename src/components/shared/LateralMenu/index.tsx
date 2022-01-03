@@ -55,7 +55,7 @@ const LateralMenu: React.FC = () => {
             <hr />
           </a>
         </Link>
-        <Link href="/Admin/Orders/List">
+        <Link href="/admin/orders/list">
           <a className={`${router.pathname === '/admin/orders/list' ? styles.active : ''}`}>
             <FontAwesomeIcon icon={faDollarSign} color="var(--color-gray-light)" className="mr-3" />
             Financeiro
