@@ -4,6 +4,7 @@ import StyledButton from '../../shared/StyledButton'
 import { faCartPlus }  from '@fortawesome/free-solid-svg-icons'
 import MaskedInput from 'react-text-mask'
 import Image from 'next/image'
+import MonthsService from '../../../util/MonthsService'
 
 import styles from './styles.module.css'
 
@@ -111,9 +112,17 @@ const CheckoutForm: React.FC = () => {
                     className={styles.gray_select}
                   >
                     <option value="">Mês</option>
-                    <option>Janeiro</option>
-                    <option>Fevereiro</option>
-                    <option>Março</option>
+                    {
+                      MonthsService.execute().map(
+                        (month, index) =>
+                          <option
+                            key={index}
+                            value={index + 1}
+                          >
+                            {month}
+                          </option>
+                      )
+                    }
                   </select>
                 </Col>
 
