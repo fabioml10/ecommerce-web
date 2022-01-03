@@ -1,38 +1,55 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart, faDollarSign } from '@fortawesome/free-solid-svg-icons'
-import useSwr from 'swr'
-import DashboardTopProductsService from '../../../services/dashboardTopProducts'
-import { toast } from 'react-toastify'
-import styles from './styles.module.css'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart, faDollarSign } from "@fortawesome/free-solid-svg-icons";
+
+import styles from './styles.module.css';
+import useSwr from 'swr';
+import DashboardTopProductService from "../../../services/dashboardTopProducts";
+import { toast } from "react-toastify";
+
+import { useSelector } from 'react-redux';
+import Dashboard from "../../../dtos/Dashboard";
+
+const defaultUrl = '/admin/v1/dashboard/top_five_products';
 
 const DashboardTopProducts: React.FC = () => {
+  const { min_date, max_date }: Dashboard = useSelector(state => state.dashboard);
+  
   const { data, error } = useSwr(
-    '/admin/v1/dashboard/top_five_products', 
-    DashboardTopProductsService.index
-  )
+    () => defaultUrl +
+      ((min_date || max_date) ?
+      `?min_date=${min_date}&max_date=${max_date}` : ''),
+    DashboardTopProductService.index
+  );
 
-  if (error) toast.error('Erro ao obter os dados para os top 5 produtos.')
+  if (error) {
+    toast.error('Erro ao obter os dados para os top 5 produtos.');
+    console.log(error);
+  }
 
   return (
     <div className={styles.container}>
       <p>Top 5 mais vendidos</p>
+
       {
         data?.map(
-          (product, index) => 
+          (product, index) =>
             <div key={index} className={styles.product}>
               <img src={product?.image} alt={product?.product} />
+              
               <div>
                 <div>
                   <span>{product?.product}</span>
                 </div>
+
                 <div>
                   <span>
                     <FontAwesomeIcon icon={faShoppingCart}/>
                     {product?.quantity}
                   </span>
+
                   <span>
                     <FontAwesomeIcon icon={faDollarSign}/>
-                    R$ {product?.total_sold}
+                    {product?.total_sold}
                   </span>
                 </div>
               </div>
@@ -40,7 +57,7 @@ const DashboardTopProducts: React.FC = () => {
         )
       }
     </div>
-  )
+  );
 }
 
-export default DashboardTopProducts
+export default DashboardTopProducts;
