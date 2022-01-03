@@ -21,7 +21,15 @@ const AdminHeader: React.FC = () => {
         <Link href="/admin/categories/list"><a><FontAwesomeIcon icon={faCheckSquare} color="var(--color-gray-light)" className={`ml-3 ${router.pathname === '/admin/categories/list' ? styles.active : ''}`} /></a></Link>
         <Link href="/admin/system_requirements/list"><a><FontAwesomeIcon icon={faLaptop} color="var(--color-gray-light)" className="ml-3" /></a></Link>
         <Link href="/admin/coupons/list"><a><FontAwesomeIcon icon={faTicketAlt} color="var(--color-gray-light)" className={`ml-3 ${router.pathname === '/Admin/system_requirements/list' ? styles.active : ''}`} /></a></Link>
-        <Link href="#"><a><FontAwesomeIcon icon={faDollarSign} color="var(--color-gray-light)" className={`ml-3 ${router.pathname === '/Admin/coupons/list' ? styles.active : ''}`} /></a></Link>
+        <Link href="/Admin/Orders/List">
+          <a>
+            <FontAwesomeIcon 
+              icon={faDollarSign} 
+              color="var(--color-gray-light)" 
+              className={`ml-3 ${router.pathname === '/admin/orders/list' ? styles.active : ''}`} 
+            />
+          </a>
+        </Link>
         <Link href="/auth/login" >
           <a 
             onClick={SignOutService.execute} 
