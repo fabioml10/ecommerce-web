@@ -1,32 +1,50 @@
 import { Row, Col, Badge } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import ProductShow from '../../../dtos/ProductShow'
+import { MouseEventHandler } from 'react'
 import styles from './styles.module.css'
 
-const CartModalItem: React.FC = () => {
+interface CartModalItemProps {
+  product: ProductShow
+  handleRemove: MouseEventHandler<SVGSVGElement>
+}
+
+const CartModalItem: React.FC<CartModalItemProps> = ({ product, handleRemove }) => {
   return (
     <div className={styles.container}>
       <Row>
         <Col xs={5}>
-          <img src="/assets/product_image.png" alt="Product Image"/>
+          <img 
+            src={product.image_url} 
+            alt={product.name}
+          />
         </Col>
         <Col xs={7}>
-          <p className={styles.name}>
-            God of War
+          <p>
+            {product.name}
           </p>
           <div className={styles.badges_container}>
-            <Badge 
-              bg="primary"
-              className={styles.badge}
-            >
-              Ação
-            </Badge>
+            {
+              product?.categories?.filter((_, index) => index < 2)?.map(
+                category => 
+                  <Badge 
+                    key={category.id}
+                    bg="primary"
+                    className={styles.badge}
+                  >
+                    {category.name}
+                  </Badge>
+              )
+            }
           </div>
           <div className={styles.price_container}>
-            <span>R$ 299,99</span>
-            <FontAwesomeIcon icon={faTrash}/>
+            <span>{`R$ ${product.price}`}</span>
+            <FontAwesomeIcon 
+              icon={faTrash}
+              onClick={handleRemove}
+            />
           </div>
-
         </Col>
       </Row>
     </div>
