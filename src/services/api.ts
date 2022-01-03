@@ -66,7 +66,7 @@ api.interceptors.response.use(res => {
 api.interceptors.request.use(req => {
   req.headers = { ContentType: 'application/json' }
 
-  if(req.url.includes('admin') || req.url.includes('storefront/v1/wish_items') || req.url.includes('auth/v1/user')) {
+  if(req.url.includes('admin') || req.url.includes('storefront/v1/wish_items') || req.url.includes('auth/v1/user') || req.url.includes('storefront/v1/coupons')) {
     const apiDataCookie = Cookie.get('@api-data');
     if (!apiDataCookie) return req
     const apiData: ApiData = JSON.parse(Cookie.get('@api-data'))
